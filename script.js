@@ -6,13 +6,19 @@ var currentPoints = parseInt(display.innerHTML);
 var currentPoints = 0
 var currentHiscores = parseInt(hiscore.innerHTML);
 var chance = 1
-var nivel = 4
+var nivelm = nivele = 4
 
 function incrementar() {
     display.innerHTML = currentPoints + 1;
     currentPoints = parseInt(display.innerHTML);
     console.log(display.innerHTML);
 }
+function decrementar(x) {
+    display.innerHTML = currentPoints - x;
+    currentPoints = parseInt(display.innerHTML);
+    console.log(display.innerHTML);
+}
+
 function checar() {
     if (currentPoints > currentHiscores) {
         currentHiscores = currentPoints;
@@ -54,9 +60,35 @@ function clicar(){
 }
 
 function melhorar(){
-    if (currentPoints >= 5*nivel) {
+    if (currentPoints >= 5*nivelm) {
         reset();
-        nivel++
+        nivelm++
         chance -= 0.1
+        atualizar()
     }
+}
+
+
+var espiritos = 0
+
+setInterval(() => {
+    for (var i = 0; i < espiritos; i++){
+        if (sortear()) incrementar();
+        else decrementar(2);
+        checar()
+    }
+}, 10000)
+
+function aprisionar(){
+    if (currentPoints >= 10*(nivele/2)) {
+        espiritos += 1;
+        reset()
+        nivele++
+        atualizar()
+    }
+}
+
+function atualizar(){
+    document.querySelector('#melcost').innerHTML = (5*nivelm)
+    document.querySelector('#espicost').innerHTML = (10*(nivele/2))
 }
