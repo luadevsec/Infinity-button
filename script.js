@@ -61,7 +61,7 @@ function clicar(){
 
 function melhorar(){
     if (currentPoints >= 5*nivelm) {
-        reset();
+        decrementar(5*nivelm);
         nivelm++
         chance -= 0.1
         atualizar()
@@ -82,7 +82,7 @@ setInterval(() => {
 function aprisionar(){
     if (currentPoints >= 10*(nivele/2)) {
         espiritos += 1;
-        reset()
+        decrementar(10*(nivele/2))
         nivele++
         atualizar()
     }
@@ -92,3 +92,4 @@ function atualizar(){
     document.querySelector('#melcost').innerHTML = (5*nivelm)
     document.querySelector('#espicost').innerHTML = (10*(nivele/2))
 }
+
